@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    avtive: dev
+---
+server:
+  port: 8001
+
+spring:
+  profiles: dev
+  application:
+    name: springCloudDemo-config-dept-client
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/clouddb02?useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 20
+      max-wait-millis: 200
+
+mybatis:
+  type-aliases-package: com.learn.springCloud.entites     #所有Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml     #mapper映射文件
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/,http://eureka7001.com:7001/eureka/ #这个是Eureka Server的服务地址
+  instance:
+    instance-id: springCloud-dept-8001  #服务名称修改
+    prefer-ip-address: true #访问路径可以显示IP地址
+---
+server:
+  port: 8001
+
+spring:
+  profiles: test
+  application:
+    name: springCloudDemo-config-eureka-client
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/clouddb02?useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 20
+      max-wait-millis: 200
+
+mybatis:
+  type-aliases-package: com.learn.springCloud.entites     #所有Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml     #mapper映射文件
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/,http://eureka7001.com:7001/eureka/ #这个是Eureka Server的服务地址
+  instance:
+    instance-id: springCloud-dept-8001  #服务名称修改
+    prefer-ip-address: true #访问路径可以显示IP地址
